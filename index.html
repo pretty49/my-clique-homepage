@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Agency | Digital Visionaries</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===================================
+           1. GLOBAL STYLES & CSS VARIABLES
+        ====================================== */
+        :root {
+            --primary-color: #FF6B00; /* Vibrant Orange */
+            --dark-color: #111111;
+            --white-color: #ffffff;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--white-color);
+            background-color: var(--dark-color);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===================================
+           2. CLEAN & MODERN NAVIGATION BAR
+        ====================================== */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo img {
+            max-height: 45px;
+            width: auto;
+            display: block;
+        }
+
+        .navbar__menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        .navbar__menu a {
+            color: var(--white-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        .navbar__menu a:hover,
+        .navbar__menu a.active-link {
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        .hamburger .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--white-color);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* ===================================
+           3. FULL PAGE SECTIONS
+        ====================================== */
+        .full-page-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1.5rem;
+            text-align: center;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+
+        .full-page-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
+            z-index: 1;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        /* ===================================
+           4. UNIQUE BACKGROUND FOR EACH SECTION
+        ====================================== */
+        #who-we-are { background-image: url('clique.png'); }
+        #what-drives-us { background-image: url('https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); }
+        #capabilities { background-image: url('https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); }
+        #portfolio { background-image: url('https://images.pexels.com/photos/3277808/pexels-photo-3277808.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); }
+        #service-plus { background-image: url('https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); }
+        #contact { background-image: url('crs.png '); }
+
+        /* ===================================
+           5. CONTENT BOX & LAYOUTS
+        ====================================== */
+        .content-box {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 3rem 4rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .content-box h1 { font-family: var(--font-heading); font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; color: var(--white-color); text-transform: uppercase; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .content-box p { font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem; color: rgba(255, 255, 255, 0.9); }
+        .btn { display: inline-block; padding: 0.8rem 2.5rem; background-color: var(--primary-color); color: var(--white-color); text-decoration: none; font-weight: 700; border-radius: 50px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255, 107, 0, 0.3); }
+
+        .drives-us-container { position: relative; z-index: 2; width: 100%; max-width: 1200px; }
+        .section-header { margin-bottom: 3rem; text-align: center; }
+        .section-header h1 { font-family: var(--font-heading); font-size: 3rem; text-transform: uppercase; margin-bottom: 1rem; }
+        .section-header p { max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); }
+        .drives-us-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .drive-card { background: rgba(255, 255, 255, 0.05); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); overflow: hidden; text-align: left; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .drive-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+        .drive-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+        .card-content { padding: 1.5rem; }
+        .card-content h3 { font-family: var(--font-heading); color: var(--primary-color); font-size: 1.5rem; margin-bottom: 0.75rem; }
+        .card-content p { font-size: 0.95rem; line-height: 1.6; color: rgba(255, 255, 255, 0.85); }
+
+        /* ===================================================
+           NEW CSS: For the inner card in "Our Capabilities"
+        ====================================================== */
+        .inner-capability-card {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2); /* Slightly darker inset look */
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 2rem; /* Space from the paragraph above */
+            text-align: left;
+        }
+
+        .capability-image {
+            flex: 0 0 40%; /* Image takes 40% of the card width */
+        }
+        .capability-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .capability-list {
+            flex: 0 0 60%; /* List takes the remaining 60% */
+            padding: 2rem;
+        }
+        
+        /* The custom numbered list */
+        .custom-numbered-list {
+            list-style: none;
+            padding-left: 0;
+            counter-reset: capabilities-counter; /* Initialize the counter */
+        }
+
+        .custom-numbered-list li {
+            counter-increment: capabilities-counter; /* Increment counter for each li */
+            display: flex;
+            align-items: flex-start; /* Align to the top for longer text */
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .custom-numbered-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* The custom number style */
+        .custom-numbered-list li::before {
+            content: counter(capabilities-counter); /* Display the counter number */
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0; /* Prevents the circle from squishing */
+        }
+        /* ===================================
+           END OF NEW CSS
+        ====================================== */
+
+        /* ===================================
+           6. MOBILE RESPONSIVENESS
+        ====================================== */
+        @media (max-width: 992px) {
+            .hamburger { display: block; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            .navbar__menu { position: fixed; left: -100%; top: 0; flex-direction: column; justify-content: center; align-items: center; gap: 3rem; background-color: rgba(10, 10, 10, 0.95); backdrop-filter: blur(15px); width: 100%; height: 100vh; transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1); }
+            .navbar__menu.active { left: 0; }
+            .navbar__menu a { font-size: 1.5rem; }
+            
+            .content-box { padding: 2rem; width: 90%; }
+            .content-box h1 { font-size: 2.5rem; }
+            
+            /* --- FIX FOR MOBILE RESPONSIVENESS --- */
+            #what-drives-us, #capabilities {
+                height: auto; /* Allow these sections to grow on mobile */
+                padding-top: 6rem; /* Add padding to avoid overlapping the header */
+                padding-bottom: 4rem;
+            }
+            
+            .section-header h1 { font-size: 2.5rem; }
+            .drives-us-grid { grid-template-columns: 1fr; }
+
+            /* --- NEW MOBILE STYLES for the inner capability card --- */
+            .inner-capability-card {
+                flex-direction: column; /* Stack image on top of list */
+            }
+            .capability-image {
+                flex-basis: auto; /* Reset flex-basis */
+                width: 100%;
+                max-height: 200px;
+            }
+            .capability-list {
+                flex-basis: auto;
+                padding: 1.5rem;
+            }
+            /* --- END OF NEW MOBILE STYLES --- */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="main-header">
+        <a href="#agency" class="logo"> <img src="logo (1).png" alt="Your Agency Logo"> </a>
+        <nav>
+            <ul class="navbar__menu">
+                <li><a href="#agency" class="active-link">The Agency</a></li>
+                <li><a href="#who-we-are">Who We Are</a></li>
+                <li><a href="#what-drives-us">What Drives Us</a></li>
+                <li><a href="#capabilities">Our Capabilities</a></li>
+                <li><a href="#portfolio">Our Portfolio</a></li>
+                <li><a href="#service-plus">Service Plus</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: The Agency (Hero with Video) -->
+        <section id="agency" class="full-page-section">
+            <video playsinline autoplay muted loop class="hero-video">
+                <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="content-box">
+                <h1>CLIQUE.NIGERIA</h1>
+                <p>We are a full-service creative agency that builds brilliant brands, remarkable websites, and game-changing campaigns.</p>
+                <a href="#who-we-are" class="btn">Discover Our Story</a>
+            </div>
+        </section>
+
+        <!-- Section 2: Who We Are -->
+        <section id="who-we-are" class="full-page-section">
+            <div class="content-box">
+                <h1>Who We Are</h1>
+                <p>We are a collective of strategists, designers, developers, and dreamers united by a passion for creating meaningful digital experiences.</p>
+                <p>CLIQUE.NIGERIA is committed to delivering inspired marketing communication solutions for our clients' unique needs. Despite our high-spirited persona, we take a disciplined, serious approach to arriving at those solutions. That means being able to meet and exceed client expectations with remarkable agility.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: What Drives Us -->
+        <section id="what-drives-us" class="full-page-section">
+            <div class="drives-us-container">
+                <div class="section-header">
+                    <h1>What Drives Us</h1>
+                      <p>"Let's be honest. Clicks, likes, and impressions mean little if they don't translate to real growth. What truly drives us at Clique.Nigeria is the tangible success of our clients. We live for the phone call that says 'sales are up 50%,' the email celebrating a 'record-breaking quarter,' and the shared excitement of seeing your brand become a household name. We are a clique of strategists, creatives, and analysts obsessed with one thing: moving the needle for your business. Your victory is our ultimate metric."</p>
+                </div>
+                <div class="drives-us-grid">
+                    <div class="drive-card">
+                        <img src="https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Our Vision">
+                        <div class="card-content">
+                            <h3>Our Vision</h3>
+                             <p>To build and infinitely grow a chain of enterprises related but not restricted to the communications industry, capable of creating great opportunities with immense benefits to people - our entire workforce and the society.</p>
+                        </div>
+                    </div>
+                    <div class="drive-card">
+                        <img src="https://images.pexels.com/photos/4057663/pexels-photo-4057663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Our Mission">
+                        <div class="card-content">
+                            <h3>Our Mission</h3>
+                            <p>To deliver qualitative, timely and value based services geared towards the realization of our clients’ goals and aspirations through the use of professionals of purpose, best brains combined with superior technology</p>
+                        </div>
+                    </div>
+                    <div class="drive-card">
+                        <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Our Values">
+                        <div class="card-content">
+                            <h3>Our Values</h3>
+                            <p>Service, Excellence, Ethics, Team Work, Integrity, Trust, Compassion, Continuous Learning.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- =============================================
+             MODIFIED SECTION: Our Capabilities
+        ================================================= -->
+        <section id="capabilities" class="full-page-section"> 
+            <div class="content-box"> 
+                <h1>Our Capabilities</h1>  
+                <p>As a full service agency, the focus of CLIQUE.NIGERIA has been to provide marketing communications solutions to discerning corporate entities and individuals that value creativity, professionalism, quality and result-oriented campaigns.</p>
+
+                <!-- START: The new inner card -->
+                <div class="inner-capability-card">
+                    <div class="capability-image">
+                        <img src=" images.png" alt="A team planning a marketing strategy on a glass board.">
+                    </div>
+                    <div class="capability-list">
+                        <ol class="custom-numbered-list">
+                            <li>Brand Development & Management</li>
+                            <li>Advertising</li>
+                            <li>Media & Public Relations</li>
+                            <li>Advocacy & Campaigns</li>
+                        </ol>
+                        <p>We come off as a strong driving force behind valuable brands, exceptional corporate sales performance, and strategy, as well as corporate and individual image building and management.
+
+                        </p>
+                    </div>
+                </div>
+                <!-- END: The new inner card -->
+
+            </div> 
+        </section>
+        
+        <!-- All other sections follow, unchanged -->
+        <section id="portfolio" class="full-page-section"> <div class="content-box"> <h1>Our Portfolio</h1> <p>Our work speaks for itself. Explore a curated selection of projects that showcase our commitment to excellence and creativity.</p> <a href="#" class="btn">View Our Work</a> </div> </section>
+        <section id="service-plus" class="full-page-section"> <div class="content-box"> <h1>Service Plus</h1> <p>We go beyond the brief. Our 'Service Plus' commitment means dedicated support, transparent communication, and a true partnership for growth.</p> </div> </section>
+        <section id="contact" class="full-page-section"> <div class="content-box"> <h1>Contact Us</h1> <p>Ready to start your next project? We'd love to hear from you. Let's create something amazing together.</p> <a href="mailto:hello@agency.com" class="btn">Get in Touch</a> </div> </section>
+    </main>
+
+    <script>
+        // --- JavaScript for Mobile Menu and Active Link Highlighting ---
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.navbar__menu');
+        const navLinks = document.querySelectorAll('.navbar__menu a');
+        const sections = document.querySelectorAll('.full-page-section');
+
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
+        navLinks.forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); }); });
+        window.addEventListener('scroll', () => { let current = ''; sections.forEach(section => { const sectionTop = section.offsetTop; const sectionHeight = section.clientHeight; if (pageYOffset >= sectionTop - sectionHeight / 3) { current = section.getAttribute('id'); } }); navLinks.forEach(link => { link.classList.remove('active-link'); if (link.getAttribute('href').includes(current)) { link.classList.add('active-link'); } }); });
+    </script>
+</body>
+</html>
